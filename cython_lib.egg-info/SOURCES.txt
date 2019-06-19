@@ -1,7 +1,5 @@
 setup.py
-cython_lib/__init__.py
 cython_lib/calculation.pyx
-cython_lib/pagerank.pyx
 cython_lib.egg-info/PKG-INFO
 cython_lib.egg-info/SOURCES.txt
 cython_lib.egg-info/dependency_links.txt
