@@ -10,8 +10,8 @@ iter_num = 10000
 X = np.random.random(300).astype(np.float32)
 Y = np.random.random(300).astype(np.float32)
 
-mX = np.random.random((120, 300)).astype(np.float32)
-mY = np.random.random((120, 300)).astype(np.float32)
+mX = np.random.random((111, 300)).astype(np.float32)
+mY = np.random.random((111, 300)).astype(np.float32)
 
 @calc_time
 def numpy_dot():
