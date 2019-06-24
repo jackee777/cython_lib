@@ -1,19 +1,23 @@
 from Cython.Distutils import build_ext
-from setuptools import setup, Extension
 from Cython.Build import cythonize
 import numpy as np
+from setuptools import setup, Extension
 
 ext_modules = [
     Extension('cython_lib.calculation',
-              #sources=['coreutils.c', 'cython_lib/calculation.pyx'],
-              sources=['cython_lib/calculation.pyx'],
+              sources=['cython_lib/coreutils.c', 'cython_lib/calculation.pyx'],
+              include_dirs=[np.get_include(), 'libs/OpenBLAS-v0.2.19/include'],
+              language='c',
+              extra_link_args=[#'libs/OpenBLAS-v0.2.19/lib/libopenblas.a',
+                  'libs/OpenBLAS-v0.2.19/lib/libopenblas.dll.a'],
+              compiler_directives={'language_level' : "3"},
+              extra_compile_args=['-O2']
+              ),
+    Extension('cython_lib.pagerank',
+              sources=['cython_lib/pagerank.pyx'],
               include_dirs=[np.get_include(), 'cython_lib'],
               compiler_directives={'language_level' : "3"}
-              ),
-    #Extension('cython_lib.pagerank',
-    #              sources=['cython_lib/pagerank.pyx'],
-    #              include_dirs=[np.get_include(), 'cython_lib'],
-    #          )
+              )
 ]
 
 setup(

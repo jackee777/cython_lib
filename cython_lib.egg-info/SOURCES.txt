@@ -1,6 +1,11 @@
 setup.py
+cython_lib/__init__.py
+cython_lib/calculation.c
 cython_lib/calculation.pyx
+cython_lib/coreutils.c
+cython_lib/pagerank.c
 cython_lib.egg-info/PKG-INFO
 cython_lib.egg-info/SOURCES.txt
 cython_lib.egg-info/dependency_links.txt
 cython_lib.egg-info/top_level.txt
+libs/OpenBLAS-v0.2.19/bin/libopenblas.dll
