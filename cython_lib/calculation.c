@@ -9,10 +9,20 @@
             "cython_lib\\coreutils.h",
             "cython_lib\\voidptr.h"
         ],
+        "extra_compile_args": [
+            "-O2"
+        ],
         "include_dirs": [
             "cython_lib",
             "C:\\Users\\stard\\AppData\\Local\\Programs\\Python\\Python35\\lib\\site-packages\\numpy\\core\\include",
-            "libs/OpenBLAS-v0.2.19/include"
+            "opt/OpenBLAS/include"
+        ],
+        "language": "c",
+        "libraries": [
+            "openblas"
+        ],
+        "library_dirs": [
+            "/opt/OpenBLAS/lib"
         ],
         "name": "cython_lib.calculation",
         "sources": [
@@ -2327,9 +2337,9 @@ static PyArrayObject *__pyx_f_10cython_lib_11calculation_cnum_dot_REAL(PyArrayOb
  */
   calc_dot_creal(((__pyx_t_10cython_lib_11calculation_REAL_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_X0))), ((__pyx_t_10cython_lib_11calculation_REAL_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_X1))), ((__pyx_t_10cython_lib_11calculation_REAL_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_result))), __pyx_v_x0_r, __pyx_v_x0_l, __pyx_v_x1_r, __pyx_v_x1_l);
 
-  /* "cython_lib/calculation.pyx":44
- *                   x0_r, x0_l, x1_r, x1_l)
+  /* "cython_lib/calculation.pyx":53
  *     """
+ * 
  *     return result             # <<<<<<<<<<<<<<
  * 
  * # use sdot(X0, X1) not (X0, X1.T)
@@ -2499,7 +2509,7 @@ static PyObject *__pyx_pf_10cython_lib_11calculation_4cnum_dot_REAL(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "cython_lib/calculation.pyx":47
+/* "cython_lib/calculation.pyx":56
  * 
  * # use sdot(X0, X1) not (X0, X1.T)
  * cdef void cnum_dot_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:             # <<<<<<<<<<<<<<
@@ -2518,7 +2528,7 @@ static void __pyx_f_10cython_lib_11calculation_cnum_dot_real(__pyx_t_10cython_li
   int __pyx_t_5;
   int __pyx_t_6;
 
-  /* "cython_lib/calculation.pyx":49
+  /* "cython_lib/calculation.pyx":58
  * cdef void cnum_dot_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:
  *     cdef int i, j
  *     cdef int ONE = 1             # <<<<<<<<<<<<<<
@@ -2527,7 +2537,7 @@ static void __pyx_f_10cython_lib_11calculation_cnum_dot_real(__pyx_t_10cython_li
  */
   __pyx_v_ONE = 1;
 
-  /* "cython_lib/calculation.pyx":51
+  /* "cython_lib/calculation.pyx":60
  *     cdef int ONE = 1
  * 
  *     for i in xrange(x0_r):             # <<<<<<<<<<<<<<
@@ -2539,7 +2549,7 @@ static void __pyx_f_10cython_lib_11calculation_cnum_dot_real(__pyx_t_10cython_li
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "cython_lib/calculation.pyx":52
+    /* "cython_lib/calculation.pyx":61
  * 
  *     for i in xrange(x0_r):
  *         for j in xrange(x1_l):             # <<<<<<<<<<<<<<
@@ -2551,7 +2561,81 @@ static void __pyx_f_10cython_lib_11calculation_cnum_dot_real(__pyx_t_10cython_li
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "cython_lib/calculation.pyx":53
+      /* "cython_lib/calculation.pyx":62
+ *     for i in xrange(x0_r):
+ *         for j in xrange(x1_l):
+ *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)             # <<<<<<<<<<<<<<
+ * 
+ * cdef void cnum_dgemm_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:
+ */
+      (__pyx_v_result[((__pyx_v_i * __pyx_v_x1_l) + __pyx_v_j)]) = ((__pyx_t_10cython_lib_11calculation_REAL_t)__pyx_v_10cython_lib_11calculation_sdot((&__pyx_v_x0_l), (&(__pyx_v_X0[(__pyx_v_i * __pyx_v_x0_l)])), (&__pyx_v_ONE), (&(__pyx_v_X1[(__pyx_v_j * __pyx_v_x1_r)])), (&__pyx_v_ONE)));
+    }
+  }
+
+  /* "cython_lib/calculation.pyx":56
+ * 
+ * # use sdot(X0, X1) not (X0, X1.T)
+ * cdef void cnum_dot_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:             # <<<<<<<<<<<<<<
+ *     cdef int i, j
+ *     cdef int ONE = 1
+ */
+
+  /* function exit code */
+}
+
+/* "cython_lib/calculation.pyx":64
+ *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)
+ * 
+ * cdef void cnum_dgemm_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:             # <<<<<<<<<<<<<<
+ *     cdef int i, j
+ *     cdef int ONE = 1
+ */
+
+static void __pyx_f_10cython_lib_11calculation_cnum_dgemm_real(__pyx_t_10cython_lib_11calculation_REAL_t *__pyx_v_X0, __pyx_t_10cython_lib_11calculation_REAL_t *__pyx_v_X1, __pyx_t_10cython_lib_11calculation_REAL_t *__pyx_v_result, int __pyx_v_x0_r, int __pyx_v_x0_l, int __pyx_v_x1_r, int __pyx_v_x1_l) {
+  int __pyx_v_i;
+  int __pyx_v_j;
+  int __pyx_v_ONE;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  int __pyx_t_6;
+
+  /* "cython_lib/calculation.pyx":66
+ * cdef void cnum_dgemm_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:
+ *     cdef int i, j
+ *     cdef int ONE = 1             # <<<<<<<<<<<<<<
+ * 
+ *     for i in xrange(x0_r):
+ */
+  __pyx_v_ONE = 1;
+
+  /* "cython_lib/calculation.pyx":68
+ *     cdef int ONE = 1
+ * 
+ *     for i in xrange(x0_r):             # <<<<<<<<<<<<<<
+ *         for j in xrange(x1_l):
+ *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)
+ */
+  __pyx_t_1 = __pyx_v_x0_r;
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "cython_lib/calculation.pyx":69
+ * 
+ *     for i in xrange(x0_r):
+ *         for j in xrange(x1_l):             # <<<<<<<<<<<<<<
+ *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)
+ * 
+ */
+    __pyx_t_4 = __pyx_v_x1_l;
+    __pyx_t_5 = __pyx_t_4;
+    for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
+      __pyx_v_j = __pyx_t_6;
+
+      /* "cython_lib/calculation.pyx":70
  *     for i in xrange(x0_r):
  *         for j in xrange(x1_l):
  *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)             # <<<<<<<<<<<<<<
@@ -2561,10 +2645,10 @@ static void __pyx_f_10cython_lib_11calculation_cnum_dot_real(__pyx_t_10cython_li
     }
   }
 
-  /* "cython_lib/calculation.pyx":47
+  /* "cython_lib/calculation.pyx":64
+ *             result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)
  * 
- * # use sdot(X0, X1) not (X0, X1.T)
- * cdef void cnum_dot_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:             # <<<<<<<<<<<<<<
+ * cdef void cnum_dgemm_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:             # <<<<<<<<<<<<<<
  *     cdef int i, j
  *     cdef int ONE = 1
  */
@@ -5075,9 +5159,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(0, 16, __pyx_L1_error)
   #if PY_MAJOR_VERSION >= 3
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) __PYX_ERR(0, 60, __pyx_L1_error)
   #else
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) __PYX_ERR(0, 60, __pyx_L1_error)
   #endif
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 272, __pyx_L1_error)
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(1, 285, __pyx_L1_error)

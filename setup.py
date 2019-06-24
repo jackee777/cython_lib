@@ -5,13 +5,13 @@ from setuptools import setup, Extension
 
 ext_modules = [
     Extension('cython_lib.calculation',
-              sources=['cython_lib/coreutils.c', 'cython_lib/calculation.pyx'],
+              sources=[
+                  'cython_lib/coreutils.c',
+                  'cython_lib/calculation.pyx'],
               include_dirs=[np.get_include(), 'opt/OpenBLAS/include'],
               libraries = ['openblas'],
               library_dirs = ['/opt/OpenBLAS/lib'],
               language='c',
-              #extra_link_args=[#'libs/OpenBLAS-v0.2.19/lib/libopenblas.a',
-              #    'libs/OpenBLAS-v0.2.19/lib/libopenblas.dll.a'],
               compiler_directives={'language_level' : "3"},
               extra_compile_args=['-O2']
               ),

@@ -25,8 +25,7 @@ void _sdot_float_one(float* X0, float* X1, float* result,
                 result[r_target + j] += X0[x0_target + k] * X1[x1_target + k];
             }
             */
-            //result[r_target + j] =
-            cblas_sdot(x0_l, X0, 1, X1, 1);
+            result[r_target + j] = cblas_sdot(x0_l, X0[x0_target], 1, X1[x1_target], 1);
         }
     }
 
@@ -51,28 +50,27 @@ void _sdot_float_four(float* X0, float* X1, float* result,
             j1 = j + 1;
             j2 = j + 2;
             j3 = j + 3;
-            for (k = 0; k < x0_l; k++) {
-                result[i*x1_l + j] += X0[i*x0_l + k] * X1[j*x1_r + k];
-                result[i*x1_l + j1] += X0[i*x0_l + k] * X1[j1*x1_r + k];
-                result[i*x1_l + j2] += X0[i*x0_l + k] * X1[j2*x1_r + k];
-                result[i*x1_l + j3] += X0[i*x0_l + k] * X1[j3*x1_r + k];
 
-                result[i1*x1_l + j] += X0[i1*x0_l + k] * X1[j*x1_r + k];
-                result[i1*x1_l + j1] += X0[i1*x0_l + k] * X1[j1*x1_r + k];
-                result[i1*x1_l + j2] += X0[i1*x0_l + k] * X1[j2*x1_r + k];
-                result[i1*x1_l + j3] += X0[i1*x0_l + k] * X1[j3*x1_r + k];
+            result[i*x1_l + j] = cblas_sdot(x0_l, X0[i*x0_l], 1, X1[j*x1_r], 1);
+            result[i*x1_l + j1] = cblas_sdot(x0_l, X0[i*x0_l], 1, X1[j1*x1_r], 1);
+            result[i*x1_l + j2] = cblas_sdot(x0_l, X0[i*x0_l], 1, X1[j2*x1_r], 1);
+            result[i*x1_l + j3] = cblas_sdot(x0_l, X0[i*x0_l], 1, X1[j3*x1_r], 1);
 
-                result[i2*x1_l + j] += X0[i2*x0_l + k] * X1[j*x1_r + k];
-                result[i2*x1_l + j1] += X0[i2*x0_l + k] * X1[j1*x1_r + k];
-                result[i2*x1_l + j2] += X0[i2*x0_l + k] * X1[j2*x1_r + k];
-                result[i2*x1_l + j3] += X0[i2*x0_l + k] * X1[j3*x1_r + k];
+            result[i1*x1_l + j] = cblas_sdot(x0_l, X0[i1*x0_l], 1, X1[j*x1_r], 1);
+            result[i1*x1_l + j1] = cblas_sdot(x0_l, X0[i1*x0_l], 1, X1[j1*x1_r], 1);
+            result[i1*x1_l + j2] = cblas_sdot(x0_l, X0[i1*x0_l], 1, X1[j2*x1_r], 1);
+            result[i1*x1_l + j3] = cblas_sdot(x0_l, X0[i1*x0_l], 1, X1[j3*x1_r], 1);
 
-                result[i3*x1_l + j] += X0[i3*x0_l + k] * X1[j*x1_r + k];
-                result[i3*x1_l + j1] += X0[i3*x0_l + k] * X1[j1*x1_r + k];
-                result[i3*x1_l + j2] += X0[i3*x0_l + k] * X1[j2*x1_r + k];
-                result[i3*x1_l + j3] += X0[i3*x0_l + k] * X1[j3*x1_r + k];
+            result[i2*x1_l + j] = cblas_sdot(x0_l, X0[i2*x0_l], 1, X1[j*x1_r], 1);
+            result[i2*x1_l + j1] = cblas_sdot(x0_l, X0[i2*x0_l], 1, X1[j1*x1_r], 1);
+            result[i2*x1_l + j2] = cblas_sdot(x0_l, X0[i2*x0_l], 1, X1[j2*x1_r], 1);
+            result[i2*x1_l + j3] = cblas_sdot(x0_l, X0[i2*x0_l], 1, X1[j3*x1_r], 1);
 
-            }
+            result[i3*x1_l + j] = cblas_sdot(x0_l, X0[i3*x0_l], 1, X1[j*x1_r], 1);
+            result[i3*x1_l + j1] = cblas_sdot(x0_l, X0[i3*x0_l], 1, X1[j1*x1_r], 1);
+            result[i3*x1_l + j2] = cblas_sdot(x0_l, X0[i3*x0_l], 1, X1[j2*x1_r], 1);
+            result[i3*x1_l + j3] = cblas_sdot(x0_l, X0[i3*x0_l], 1, X1[j3*x1_r], 1);
+
         }
     }
 }

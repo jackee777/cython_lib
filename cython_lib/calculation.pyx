@@ -35,16 +35,33 @@ cpdef np.ndarray cnum_dot_REAL(np.ndarray[REAL_t, ndim=2] X0, np.ndarray[REAL_t,
                   <REAL_t *>(np.PyArray_DATA(X1)),
                   <REAL_t *>(np.PyArray_DATA(result)),
                   x0_r, x0_l, x1_r, x1_l)
+
+
     """
     cnum_dot_real(<REAL_t *>(np.PyArray_DATA(X0)),
                   <REAL_t *>(np.PyArray_DATA(X1)),
                   <REAL_t *>(np.PyArray_DATA(result)),
                   x0_r, x0_l, x1_r, x1_l)
     """
+    """
+    cnum_dgemm_real(<REAL_t *>(np.PyArray_DATA(X0)),
+               <REAL_t *>(np.PyArray_DATA(X1)),
+               <REAL_t *>(np.PyArray_DATA(result)),
+               x0_r, x0_l, x1_r, x1_l)
+    """
+
     return result
 
 # use sdot(X0, X1) not (X0, X1.T)
 cdef void cnum_dot_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:
+    cdef int i, j
+    cdef int ONE = 1
+
+    for i in xrange(x0_r):
+        for j in xrange(x1_l):
+            result[i*x1_l+j] = <REAL_t>sdot(&x0_l, &X0[i*x0_l], &ONE, &X1[j*x1_r], &ONE)
+
+cdef void cnum_dgemm_real(REAL_t* X0, REAL_t* X1, REAL_t* result, int x0_r, int x0_l, int x1_r, int x1_l) nogil:
     cdef int i, j
     cdef int ONE = 1
 
