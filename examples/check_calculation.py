@@ -10,8 +10,8 @@ iter_num = 10000
 X = np.random.random(300).astype(np.float32)
 Y = np.random.random(300).astype(np.float32)
 
-mX = np.random.random((111, 300)).astype(np.float32)
-mY = np.random.random((111, 300)).astype(np.float32)
+mX = np.random.random((120, 300)).astype(np.float32)
+mY = np.random.random((120, 300)).astype(np.float32)
 
 @calc_time
 def numpy_dot():
@@ -41,12 +41,25 @@ def multi_cnumpy_dot():
 def multi_cnumpy_dot_REAL():
     for i in range(iter_num):
         cython_lib.calculation.cnum_dot_REAL(mX, mY.T)
+        
+@calc_time
+def multi_cnumpy_gemm_REAL():
+    for i in range(iter_num):
+        cython_lib.calculation.cnum_gemm_REAL(mX, mY.T)
 
+# numpy's dot
 cnumpy_dot()
 multi_cnumpy_dot()
+# cnumpy dot with for
 multi_cnumpy_dot_REAL()
+# gemm dot
+multi_cnumpy_gemm_REAL()
 
 # we can see small errors by underflow
+print(mX)
+print(mY.T)
+#print(mX @ mY)
+#print(mX.T @ mY.T)
 print(mX @ mY.T)
-print(cython_lib.calculation.cnum_dot_REAL(mX, mY.T))
-print(mX @ mY.T == cython_lib.calculation.cnum_dot_REAL(mX, mY.T))
+print(cython_lib.calculation.cnum_gemm_REAL(mX, mY.T))
+print(mX @ mY.T == cython_lib.calculation.cnum_gemm_REAL(mX, mY.T))

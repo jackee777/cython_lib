@@ -17,7 +17,7 @@ ext_modules = [
               ),
     Extension('cython_lib.pagerank',
               sources=['cython_lib/pagerank.pyx'],
-              include_dirs=[np.get_include(), 'cython_lib'],
+              include_dirs=[np.get_include()],
               compiler_directives={'language_level' : "3"}
               )
 ]
