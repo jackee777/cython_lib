@@ -6,8 +6,8 @@ Especially, calculation.pyx, calculation.pxd, coreutils.c, and, coreutils.h help
 # reference pages
 [How to Use](https://github.com/jackee777/cython_lib/tree/master/How_to_Use)
 
-- dot
-- Personalized PageRank (PPR)
+- [dot](https://github.com/jackee777/cython_lib/blob/master/How_to_Use/dot.md)
+- [Personalized PageRank (PPR)](https://github.com/jackee777/cython_lib/blob/master/How_to_Use/Personalized_PageRank.md)
 
 # install
 ```
