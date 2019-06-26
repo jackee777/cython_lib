@@ -5,12 +5,12 @@ This code can only use dtype float32.
 The way to use them is the same as [numpy.dot](https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html).
 
 ## cnum_dot_REAL(a, b)
-- a 2-D float arrays
-- b 2-D float arrays
+- a: 2-D float arrays
+- b: 2-D float arrays
 
 ## cnum_gemm_REAL(a, b)
-- a 2-D float arrays
-- b 2-D float arrays
+- a: 2-D float arrays
+- b: 2-D float arrays
 
 # Example Code
 'cnum_gemm_REAL' and 'cnum_dot_REAL' get the same results.
