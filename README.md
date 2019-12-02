@@ -17,14 +17,15 @@ python setup.py install
 ## use openblas
 ### openblas install Ubuntu
 ```
+sudo apt-get install libopenblas-dev
+```
+or 
+```
 sudo apt-get install git python-dev gfortran
 git clone https://github.com/xianyi/OpenBLAS
 cd OpenBLAS
 make FC=gfortran
 sudo make PREFIX=/opt/openblas install
-```
-
-```
 export LD_LIBRARY_PATH=/opt/OpenBLAS/lib:$LD_LIBRARY_PATH > ~/.bashrc
 ```
 
